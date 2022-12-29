@@ -17,7 +17,7 @@ function App() {
                 }
             })
             .then((data) => {
-                console.log("Found movie data successfully: ", data.Search);
+                console.log("Movie Data: ", data.Search);
                 setMovies(data.Search);
             })
             .catch((error) => {
@@ -66,7 +66,7 @@ function App() {
                     }}
                 />
             </div>
-            {movies.length > 0 ? (
+            {movies?.length > 0 ? (
                 <div className="container">
                     {movies.map((movie) => {
                         return <MovieCard key={movie.imdbID} movie={movie} />;
@@ -74,7 +74,7 @@ function App() {
                 </div>
             ) : (
                 <div className="empty">
-                    <h2>No Movies Found</h2>
+                    <h2>No Movies or TV Series Found</h2>
                 </div>
             )}
         </div>
