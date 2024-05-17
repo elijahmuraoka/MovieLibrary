@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import SearchIcon from "./search.svg";
-import MovieCard from "./components/MovieCard.jsx";
+import { useEffect, useState } from 'react';
+import './App.css';
+import SearchIcon from './search.svg';
+import MovieCard from './components/MovieCard.jsx';
+
+const API_URL = `https://omdbapi.com?apikey=${process.env.REACT_APP_OMDB_API_KEY}`;
 
 function App() {
-    const API_KEY = "a2723861";
-    const API_URL = `http://omdbapi.com?apikey=${API_KEY}`;
-
     const searchMovies = async (title) => {
         await fetch(`${API_URL}&s=${title}`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Unable to retrieve data properly.");
+                    throw new Error('Unable to retrieve data properly.');
                 } else {
                     return response.json();
                 }
             })
             .then((data) => {
-                console.log("Movie Data: ", data.Search);
+                console.log('Movie Data: ', data.Search);
                 setMovies(data.Search);
             })
             .catch((error) => {
@@ -26,18 +25,18 @@ function App() {
     };
 
     const handleEnterKey = (e) => {
-        if (e.key === "Enter") {
-            console.log("Search icon was clicked with value: ", searchQuery);
-            setSearchQuery("");
+        if (e.key === 'Enter') {
+            console.log('Search icon was clicked with value: ', searchQuery);
+            setSearchQuery('');
             searchMovies(searchQuery);
         }
     };
 
     const [movies, setMovies] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        searchMovies("Batman");
+        searchMovies('Batman');
     }, []);
 
     return (
@@ -58,10 +57,10 @@ function App() {
                     alt="search icon"
                     onClick={() => {
                         console.log(
-                            "Search icon was clicked with value: ",
+                            'Search icon was clicked with value: ',
                             searchQuery
                         );
-                        setSearchQuery("");
+                        setSearchQuery('');
                         searchMovies(searchQuery);
                     }}
                 />
